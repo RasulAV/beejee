@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} New Task {% endblock %}
+
+{% block body %}
+	<h1>Новая задача</h1>
+	
+	<form method="post" action="/tasks/add" novalidate>
+	  <div class="row">
+	    <div class="col">
+	      <input type="text" name="name" class="form-control" placeholder="Имя" value="{{ name }}"  >
+	    </div>
+	    <div class="col">
+	       <input type="email" name="email" class="form-control" placeholder="E-mail" value="{{ email }}" >
+	    </div>
+	  </div>
+	  
+	  <div class="my-4">
+	      <textarea name="description" class="form-control" placeholder="Описание" >{{ descr }}</textarea>
+	  </div>
+	  
+	  <button class="btn btn-primary" type="submit">Подтвердить</button>
+
+	</form>	
+{% endblock %}

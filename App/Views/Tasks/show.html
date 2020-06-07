@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %} Tasks {% endblock %}
+
+{% block body %}
+	{% set url = '/tasks/show' %}
+	{% set tableMenuIDs = ['name','email','descr','isdone'] %}
+	{% set tableMenuNames = ['Имя','Email','Описание','Статус'] %}
+	
+    <h1> Здравствуйте {% if current_user %} , <span class="text-muted">{{ current_user.name }}</span> {% endif %}</h1>
+    
+    <div class="row my-4">
+	    <div class="col-md-6">
+		    {% include 'includes/paginator.html' %}
+	    </div>
+	    
+	    <div class="col-md-6">
+		    <a href="/tasks/new" class="btn btn-primary" role="button" aria-pressed="true"> Добавить новую</a>
+	    </div>
+    </div>
+    
+	<div class="table-responsive">	    
+		<table class="table table-hover">
+			  <thead class="thead-dark">
+			    <tr>
+				  {% for menuItem in tableMenuIDs %}
+				     	<th scope="col" style="min-width: 10rem">
+					      	<a class="text-reset" href="{{ url }}/{{ menuItem }}/{% if orderby is same as(menuItem) and ascdesc == 'asc' %}desc{% else %}asc{% endif %}/{{ paginator['pageno'] }}/{{ paginator['limit'] }}"> {{ tableMenuNames[loop.index0] }}  
+						      	{% if orderby is same as(menuItem) %}
+						      		<i class="fa fa-arrow-{% if ascdesc == 'asc' %}down{% else %}up{% endif %}" aria-hidden="true"></i>  
+						      	{% endif %}
+						  	</a>
+						</th>
+			      {% endfor %}
+			      
+			      {% if current_user %} <th><i class="fa fa-pencil pl-2" ></i></th>{% endif %}
+			    </tr>
+			  </thead>
+			  <tbody>
+			    {% for task in tasks %}
+				    <tr>
+				      <td scope="row">{{task.name}}</td>
+				      <td>{{task.email}}</td>
+				      <td>{{task.descr}}</td>
+				      <td> 
+					      {% if task.isdone %}
+					      	<span class="badge badge-success">выполнено</span>
+					      {% else %}
+					      	<span class="badge badge-warning">в процессе</span>
+					      {% endif %}
+					      
+					      {% if task.istouched %}
+					      	<span class="badge badge-info">отредактировано</span>
+					      {% endif %}
+				      </td>
+				      {% if current_user %} <td><a href="/tasks/edit/{{task.id}}" class="btn btn-outline-info" role="button" aria-pressed="true"><i class="fa fa-pencil" aria-hidden="true"></i>
+</a></td> {% endif %}
+				    </tr>
+			    {% endfor %}
+			  </tbody>
+		</table>
+	</div>
+{% endblock %}

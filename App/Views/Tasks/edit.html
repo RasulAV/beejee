@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактирование задачи{% endblock %}
+
+{% block body %}
+	<h1>Редактировать задачу под номером {{ id }}</h1>
+	
+	<form method="post" action="/tasks/update">
+		
+		<input type="text" class="d-none" name="id" value="{{ id }}" > 
+		
+		<div class="row mt-4">
+		    <div class="col">
+		      <input type="text" class="form-control " placeholder="Имя" value="{{task.name}}" readonly>
+		    </div>
+		    <div class="col">
+		       <input type="email" class="form-control " placeholder="E-mail" value="{{task.email}}" readonly>
+		    </div>
+		</div>
+	  
+		<div class="my-4">
+		    <textarea name="description" class="form-control" placeholder="Описание" required> {{task.descr}}</textarea>
+		</div>
+	  
+	  	<div class="form-check mb-4">
+		  <input class="form-check-input" name="isdone" type="checkbox" value="" id="doneCheck" {% if task.isdone=='1' %} checked {% endif %}>
+		  <label class="form-check-label" for="doneCheck">
+		    Задание выполнено
+		  </label>
+		</div>
+	  
+	  <button class="btn btn-primary" type="submit">Подтвердить</button>
+
+	</form>	
+{% endblock %}

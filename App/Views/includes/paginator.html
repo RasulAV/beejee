@@ -1,0 +1,17 @@
+{% if paginator['num'] > 1 %}   
+    <ul class="pagination">
+   		<li class="page-item {% if not paginator['pageno']>1 %} disabled {% endif %}">
+   		 	<a class="page-link" {% if paginator['pageno']>1 %} href="{{ url }}/{{ orderby }}/{{ascdesc}}/{{ paginator['pageno'] -1 }}/{{ paginator['limit'] }}" {% endif %} aria-label="Previous"> Пред. </a>
+   		</li>
+        
+        {% for i in 1..paginator['num'] %}
+	       <li class="page-item {% if paginator['pageno']== i %}active{% endif %}">
+	        	<a class="page-link" href="{{ url }}/{{ orderby }}/{{ascdesc}}/{{ i }}/{{ paginator['limit'] }}">{{i}}</a>
+	       </li>
+        {% endfor %}
+    
+   	   <li class="page-item {% if paginator['pageno']== paginator['num'] %} disabled {% endif %}">
+   	 		<a class="page-link" {% if paginator['pageno']!= paginator['num'] %} href="{{ url }}/{{ orderby }}/{{ascdesc}}/{{ paginator['pageno'] + 1 }}/{{ paginator['limit'] }}"{% endif %} aria-label="Next"> След. </a>
+       </li>
+    </ul>
+{% endif %}

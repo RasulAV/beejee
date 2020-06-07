@@ -1,0 +1,4 @@
+[07-Jun-2020 16:25:32 Asia/Baku] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 /Users/rasulakhmedkhanov/Documents/Sites/beejee/public_html/index.php(47): Core\Router->dispatch('tasks/show/id/a...')
+#1 {main}
+Thrown in '/Users/rasulakhmedkhanov/Documents/Sites/beejee/Core/Router.php' on line 130
