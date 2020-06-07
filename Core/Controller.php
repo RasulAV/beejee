@@ -52,7 +52,7 @@ abstract class Controller
                 $this->after();
             }
         } else {
-            throw new \Exception("Method $method not found in controller " . get_class($this));
+            throw new \Exception("Метод $method не найден в контроллере " . get_class($this));
         }
     }
 
@@ -97,8 +97,7 @@ abstract class Controller
     {
         if (! Auth::getUser()) {
 
-            //Flash::addMessage('Please login to access that page');
-            Flash::addMessage('Please login to access that page', Flash::INFO);
+            Flash::addMessage('Пожалуйста войдите в систему чтобы получить необходимый доступ', Flash::INFO);
 
             $this->redirect('/login');
         }
