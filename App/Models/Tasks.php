@@ -16,7 +16,7 @@ class Tasks extends \Core\Model
 	*	@param integer $pageno Current page number
 	*	@param integer $limit How many post need to be shown
 	*
-	*	@return integer 
+	*	@return integer $num Amount of posts
 	*/
 	public static function countRows($pageno, $limit)
 	{
@@ -30,7 +30,7 @@ class Tasks extends \Core\Model
 		$pagecount= $stmt->fetchColumn();
 		$num = ceil($pagecount/$limit);
 		
-		return $result = array("num"=>$num, "pageno"=>$pageno, "limit"=>$limit);
+		return $num;//$result = array("num"=>$num, "pageno"=>$pageno, "limit"=>$limit);
 	}
 	
 	/**

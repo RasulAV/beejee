@@ -68,7 +68,8 @@ class Tasks extends \Core\Controller
 		$orderby= $this->route_params['orderby'] ?? 'name';
 		$ascdesc= $this->route_params['ascdesc'] ?? 'asc';
 		 
-		$this->view_params['paginator']= ModelTasks::countRows($pageno, $limit);
+		$num= ModelTasks::countRows($pageno, $limit);
+		$this->view_params['paginator']= array("num"=>$num, "pageno"=>$pageno, "limit"=>$limit);
 	    $this->view_params['tasks']= ModelTasks::getAll($pageno, $limit, $orderby, $ascdesc);
 	    $this->view_params['orderby']= $orderby;
 	    $this->view_params['ascdesc']= $ascdesc;
